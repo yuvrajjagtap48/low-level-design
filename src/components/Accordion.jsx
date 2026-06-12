@@ -1,35 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AccordionItem from "./AccordionItem";
 
-
-const data = [
-  {
-    title: "Accordion Item #1",
-    body: "This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
-  },
-  {
-    title: "Accordion Item #2",
-    body: "This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
-  },
-  {
-    title: "Accordion Item #3",
-    body: "This is the first item's accordion body. It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the .accordion-body, though the transition does limit overflow.",
-  },
-];
-
-
-
-
 const Accordion = () => {
+  const [data, setData] = useState([]);
   const [openIndex, setOpenIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchMemes = async () => {
+      const response = await fetch("https://meme-api.com/gimme/20");
+      const json = await response.json();
+      setData(json.memes ?? []);
+    };
+
+    fetchMemes();
+  }, []);
+
   return (
-    <div className="w-[50%] m-auto mt-5">
+    <div className="m-auto mt-5 w-[50%]">
       {data.map((item, index) => (
         <AccordionItem
           key={index}
           title={item.title}
-          body={item.body}
-          isOpen={index === openIndex ? true : false}
+          body={item.postLink || item.url}
+          isOpen={index === openIndex}
           setIsOpen={() => {
             index === openIndex ? setOpenIndex(null) : setOpenIndex(index);
           }}
@@ -38,4 +31,5 @@ const Accordion = () => {
     </div>
   );
 };
+
 export default Accordion;
