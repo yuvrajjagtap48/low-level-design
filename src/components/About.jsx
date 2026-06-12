@@ -1,14 +1,27 @@
+import { LANG } from "../utils/langConstant";
 
-const About = () => {
-    return (
-        <div>
-            <h1 className="text-2xl font-bold">About</h1>
-            <p>This is a meme app built using React. It fetches 
-            memes from the Meme API and displays them in a grid 
-            layout. The app also includes a shimmer effect while 
-            the memes are being loaded.</p>
-        </div>
-    )
-}
-
-export default About
+const About = ({ lang }) => {
+  console.log(lang);
+  const data = LANG[lang] ?? LANG.en;
+  return (
+    <div>
+      <div>
+        <h1 className="font-bold text-2xl my-5">{data.title}</h1>
+        <p>{data.desc}</p>
+      </div>
+      <div>
+        <h1 className="font-bold text-2xl my-5">{data.title2}</h1>
+        <p>{data.desc}</p>
+      </div>
+      <div>
+        <h1 className="font-bold text-2xl my-5">{data.title3}</h1>
+        <p>{data.desc}</p>
+      </div>
+      <div>
+        <h1 className="font-bold text-2xl my-5">{data.title4}</h1>
+        <p>{data.desc}</p>
+      </div>
+    </div>
+  );
+};
+export default About;
