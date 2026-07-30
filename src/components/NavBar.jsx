@@ -6,11 +6,12 @@ const NavBar = ({ lang, setLang }) => {
         <nav className="px-20 m-2 w-full flex justify-between text-lg">
           <a href="/">Home </a>
           <a href="/about">About </a>
-          <a href="/team">Team </a>
           <a href="/login">Login </a>
           <a href="/Accordion">Accordion </a>
           <a href="/image-slider">Image Slider </a>
           <a href="/search-ui">Search UI </a>
+          <a href="/todo">ToDo </a>
+          <a href="/toogle">Toogle </a>
         </nav>
         <select value={lang} onChange={(e) => setLang(e.target.value)}>
           <option value="en">English</option>
